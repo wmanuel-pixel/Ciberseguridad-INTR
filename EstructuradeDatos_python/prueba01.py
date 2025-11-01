@@ -1,0 +1,1 @@
+print("Dame un punto de apoyo")
