@@ -7,7 +7,7 @@ class Articulos:
             host="localhost",
             user="root",
             passwd="",
-            database="bd1"
+            database="my base de datos 1"
         )
 
     def alta(self, datos):
