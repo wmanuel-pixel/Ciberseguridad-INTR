@@ -3,7 +3,7 @@
 import tkinter as tk
 
 root = tk.Tk()
-root.title("Ejercicio 2")
+root.title("texto desde Entry a Label")
 root.geometry("400x200")
 
 entry_texto = tk.Entry(root, width=30)
