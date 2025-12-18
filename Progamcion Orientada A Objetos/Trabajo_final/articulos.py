@@ -1,35 +1,42 @@
 import mysql.connector
+import db as db_helper
 
 class Articulos:
 
-    def abrir(self):
-        conexion=mysql.connector.connect(host="localhost", 
-                                              user="root", 
-                                              passwd="", 
-                                              database="my base de datos 1")
-        return conexion
+    def __init__(self, host="localhost", user="root", passwd="", database="articulos_db"):
+        self.host = host
+        self.user = user
+        self.passwd = passwd
+        self.database = database
 
+    def abrir(self):
+        return db_helper.get_connection(host=self.host, user=self.user, passwd=self.passwd, database=self.database)
 
     def alta(self, datos):
-        cone=self.abrir()
-        cursor=cone.cursor()
-        sql="insert into articulos(descripcion, precio) values (%s,%s)"
+        cone = self.abrir()
+        cursor = cone.cursor()
+        sql = "INSERT INTO articulos(descripcion, precio) VALUES (%s,%s)"
         cursor.execute(sql, datos)
         cone.commit()
+        cursor.close()
         cone.close()
 
     def consulta(self, datos):
-        cone=self.abrir()
-        cursor=cone.cursor()
-        sql="select descripcion, precio from articulos where codigo=%s"
+        cone = self.abrir()
+        cursor = cone.cursor()
+        sql = "SELECT descripcion, precio FROM articulos WHERE codigo=%s"
         cursor.execute(sql, datos)
+        rows = cursor.fetchall()
+        cursor.close()
         cone.close()
-        return cursor.fetchall()
+        return rows
 
     def recuperar_todos(self):
-        cone=self.abrir()
-        cursor=cone.cursor()
-        sql="select codigo, descripcion, precio from articulos"
+        cone = self.abrir()
+        cursor = cone.cursor()
+        sql = "SELECT codigo, descripcion, precio FROM articulos"
         cursor.execute(sql)
+        rows = cursor.fetchall()
+        cursor.close()
         cone.close()
-        return cursor.fetchall()
+        return rows
