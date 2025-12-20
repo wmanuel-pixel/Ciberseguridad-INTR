@@ -7,13 +7,13 @@ DEFAULT_PASS = ""
 DEFAULT_DB = "articulos_db"
 
 def ensure_database_and_table(host=DEFAULT_HOST, user=DEFAULT_USER, passwd=DEFAULT_PASS, database=DEFAULT_DB):
-    # Connect to server (no database) to create database if needed
+    
     try:
         conn = mysql.connector.connect(host=host, user=user, passwd=passwd)
         cursor = conn.cursor()
         cursor.execute(f"CREATE DATABASE IF NOT EXISTS `{database}` DEFAULT CHARACTER SET 'utf8' ")
         conn.database = database
-        # create table articulos if not exists
+        
         create_table = (
             "CREATE TABLE IF NOT EXISTS articulos ("
             "codigo INT AUTO_INCREMENT PRIMARY KEY, "
